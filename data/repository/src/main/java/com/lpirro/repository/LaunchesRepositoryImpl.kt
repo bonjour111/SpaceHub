@@ -1,0 +1,58 @@
+package com.lpirro.repository
+
+import com.lpirro.domain.repository.LaunchesRepository
+import com.lpirro.network.SpaceHubApiService
+import com.lpirro.network.models.LaunchRemote
+import com.lpirro.network.models.PaginatedResultRemote
+import com.lpirro.persistence.model.LaunchType
+import com.lpirro.persistence.room.LaunchDao
+import com.lpirro.repository.mapper.LaunchMapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import java.net.ConnectException
+import java.net.UnknownHostException
+
+class LaunchesRepositoryImpl(
+    private val spaceHubApiService: SpaceHubApiService,
+    private val launchDao: LaunchDao,
+    private val mapper: LaunchMapper
+) : LaunchesRepository {
+
+    override suspend fun getUpcomingLaunches() = flow {
+        refreshCache({ spaceHubApiService.getUpcomingLaunches() }, LaunchType.UPCOMING)
+        val launches = launchDao.getLaunchesWithType(LaunchType.UPCOMING).map(mapper::mapToDomain)
+        emit(launches)
+    }.flowOn(Dispatchers.IO)
+
+    override suspend fun getPastLaunches() = flow {
+        refreshCache({ spaceHubApiService.getPastLaunches() }, LaunchType.PAST)
+        val launches = launchDao.getLaunchesWithType(LaunchType.PAST).map(mapper::mapToDomain)
+        emit(launches)
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun refreshCache(
+        networkCall: suspend () -> PaginatedResultRemote<List<LaunchRemote>>,
+        type: LaunchType
+    ) {
+        return withContext(Dispatchers.IO) {
+            try {
+                val result = networkCall.invoke().results.map { mapper.mapToLocal(it, type) }
+                launchDao.deleteAll(type)
+                launchDao.insertAll(result)
+            } catch (e: Exception) {
+                when (e) {
+                    is UnknownHostException,
+                    is ConnectException,
+                    is HttpException -> {
+                        if (launchDao.getLaunchesWithType(type).isEmpty())
+                            throw Exception()
+                    }
+                    else -> throw e
+                }
+            }
+        }
+    }
+}

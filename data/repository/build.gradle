@@ -1,0 +1,34 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.lpirro.repository'
+}
+
+dependencies {
+
+    implementation project(":domain")
+    api project(":data:network")
+    api project(':data:persistence')
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.kotlinxCoroutinesCore"
+
+    // HILT
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt"
+
+    // JUnit
+    testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.extJunit"
+
+    // Mockito
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$rootProject.mockitoKotlin"
+    testImplementation "org.mockito:mockito-inline:$rootProject.mockitoInline"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+
+}

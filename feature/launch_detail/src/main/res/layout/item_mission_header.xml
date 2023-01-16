@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:shapeAppearance="@style/ShapeAppearance.OnlyBottomCorners"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/missionPatchImage"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:layout_marginVertical="@dimen/margin_20dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:contentDescription="@string/mission_patch_content_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@android:color/black" />
+
+        <TextView
+            android:id="@+id/missionName"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_20dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            app:layout_constraintBottom_toTopOf="@+id/missionOrbit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/missionPatchImage"
+            android:layout_marginTop="@dimen/margin_20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="One Web" />
+
+        <ImageView
+            android:id="@+id/orbitIcon"
+            android:layout_width="@dimen/item_mission_icon_size"
+            android:layout_height="@dimen/item_mission_icon_size"
+            android:src="@drawable/orbit"
+            app:layout_constraintBottom_toBottomOf="@+id/missionOrbit"
+            app:layout_constraintStart_toStartOf="@+id/missionName"
+            app:layout_constraintTop_toTopOf="@+id/missionOrbit"
+            app:tint="?attr/colorPrimary"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/missionOrbit"
+            style="@style/TextAppearance.Material3.LabelMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/item_mission_header_info_vertical_spacing"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/missionType"
+            app:layout_constraintEnd_toEndOf="@+id/missionName"
+            app:layout_constraintStart_toEndOf="@+id/orbitIcon"
+            app:layout_constraintTop_toBottomOf="@+id/missionName"
+            tools:text="Orbit: Polar Orbit" />
+
+        <ImageView
+            android:id="@+id/typeIcon"
+            android:layout_width="@dimen/item_mission_icon_size"
+            android:layout_height="@dimen/item_mission_icon_size"
+            android:src="@drawable/rocket_land"
+            app:layout_constraintBottom_toBottomOf="@+id/missionType"
+            app:layout_constraintStart_toStartOf="@+id/missionName"
+            app:layout_constraintTop_toTopOf="@+id/missionType"
+            app:tint="?attr/colorPrimary"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/missionType"
+            style="@style/TextAppearance.Material3.LabelMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/item_mission_header_info_vertical_spacing"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/missionAgency"
+            app:layout_constraintEnd_toEndOf="@+id/missionName"
+            app:layout_constraintStart_toEndOf="@+id/orbitIcon"
+            app:layout_constraintTop_toBottomOf="@+id/missionOrbit"
+            tools:text="Type: Communication" />
+
+        <ImageView
+            android:id="@+id/agencyIcon"
+            android:layout_width="@dimen/item_mission_icon_size"
+            android:layout_height="@dimen/item_mission_icon_size"
+            android:src="@drawable/domain"
+            app:layout_constraintBottom_toBottomOf="@+id/missionAgency"
+            app:layout_constraintStart_toStartOf="@+id/missionName"
+            app:layout_constraintTop_toTopOf="@+id/missionAgency"
+            app:tint="?attr/colorPrimary"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/missionAgency"
+            style="@style/TextAppearance.Material3.LabelMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="@dimen/item_mission_header_info_vertical_spacing"
+            android:layout_marginBottom="@dimen/margin_20dp"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/missionName"
+            app:layout_constraintStart_toEndOf="@+id/orbitIcon"
+            app:layout_constraintTop_toBottomOf="@+id/missionType"
+            tools:text="Agency: SpaceX" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

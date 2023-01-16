@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="Theme.SpaceHub" parent="Base.Theme.SpaceHub">
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    </style>
+</resources>

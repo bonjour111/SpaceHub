@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="launch_detail_horizontal_spacing">12dp</dimen>
+    <dimen name="launch_detail_vertical_spacing">20dp</dimen>
+    <dimen name="item_mission_icon_size">16dp</dimen>
+    <dimen name="item_mission_header_info_vertical_spacing">6dp</dimen>
+</resources>

@@ -1,0 +1,97 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.3.1' apply false
+    id 'com.android.library' version '7.3.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
+    id 'com.google.dagger.hilt.android' version '2.44' apply false
+    id "org.jlleitschuh.gradle.ktlint" version "10.2.0"
+    id 'androidx.navigation.safeargs' version '2.5.3' apply false
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1' apply false
+}
+
+ext {
+    // Versioning
+    compileSdk = 33
+    minSdk = 24
+    targetSdk = 33
+    versionCode = 1
+    versionName = "1.0"
+    jvmTarget = "1.8"
+
+    // AndroidX
+    coreKtx = "1.9.0"
+    appCompat = "1.6.0"
+    material = "1.7.0"
+    constraintLayout = "2.1.4"
+    navigationFragmentKtx = "2.5.3"
+    navigationUiKtx = "2.5.3"
+    lifeCycle = "2.5.1"
+    recyclerView = "1.2.1"
+    chromeWebTab = "1.4.0"
+    swipeRefresh = "1.1.0"
+
+    // Others
+    hiltGradle = "2.38.1"
+    ktlint = "10.2.0"
+    glide = "4.14.2"
+    adapterDelegate = "4.3.2"
+    maps = "18.1.0"
+
+    // Unit Test
+    junit = "4.13.2"
+    extJunit = "1.1.5"
+
+    // Mockito
+    mockitoKotlin = "4.0.0"
+    mockitoInline = "3.5.13"
+    
+    // UI Test
+    espressoCore = "3.5.1"
+
+    // Hilt - DI
+    hilt = "2.44.2"
+
+    // Networking
+    retrofit = "2.9.0"
+    retrofitGsonConverter = "2.9.0"
+    httpLogginInterceptor = "4.10.0"
+    okHttp = "4.8.0"
+
+    // Coroutines
+    kotlinxCoroutinesCore = "1.5.1"
+
+    // Room
+    room = "2.4.3"
+
+    // Timber
+    timber = "5.0.1"
+
+    // YouTube Player
+    androidyoutubeplayer = "11.1.0"
+}
+
+subprojects {
+    apply plugin: "org.jlleitschuh.gradle.ktlint" // Version should be inherited from parent
+
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdk rootProject.compileSdk
+                defaultConfig {
+                    minSdk rootProject.minSdk
+                    targetSdk rootProject.targetSdk
+                    versionCode rootProject.versionCode
+                    versionName rootProject.versionName
+                    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+                }
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+                kotlinOptions {
+                    jvmTarget = '1.8'
+                }
+            }
+        }
+    }
+}

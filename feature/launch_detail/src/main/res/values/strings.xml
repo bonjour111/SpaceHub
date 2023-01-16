@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="launch_detail">Launch Detail</string>
+    <string name="tab_launch_detail_overview">Overview</string>
+    <string name="tab_launch_detail_mission">Mission</string>
+    <string name="tab_launch_detail_vehicles">Vehicles</string>
+    <string name="launch_image_content_description">Launch Image</string>
+    <string name="add_to_calendar">Add to calendar</string>
+    <string name="save_button">Save</string>
+    <string name="launchpad">Launchpad</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
+    <string name="total_launches">Total Launches</string>
+    <string name="wikipedia">Wikipedia</string>
+    <string name="info">Info</string>
+    <string name="maps">Maps</string>
+    <string name="watch_live">Watch Live</string>
+    <string name="country">Country</string>
+    <string name="administrator">Administrator</string>
+    <string name="founded">Founded</string>
+    <string name="agency">Agency</string>
+    <string name="agency_logo_content_description">Agency Logo</string>
+    <string name="more">More</string>
+    <string name="launch_trajectory">Launch Trajectory</string>
+    <string name="full_screen">Go Full Screen</string>
+    <string name="mission_patch_content_description">Mission Patch Image</string>
+    <string name="mission_header_orbit">Orbit: %1$s</string>
+    <string name="mission_header_type">Type: %1$s</string>
+    <string name="mission_header_agency">Agency: %1$s</string>
+    <string name="description">Description</string>
+    <string name="launch_info">Launch Info</string>
+    <string name="net">NET</string>
+    <string name="window_start">Window Start</string>
+    <string name="window_end">Window End</string>
+    <string name="mission_details_are_not_available_for_this_launch">Mission details are not available for this launch</string>
+    <string name="more_info">More Info</string>
+    <string name="launch_updates">Updates</string>
+</resources>

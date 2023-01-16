@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.lpirro.spacehub'
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def MAPS_API_KEY = properties.getProperty('MAPS_API_KEY')
+
+    defaultConfig {
+        manifestPlaceholders.MAPS_API_KEY = MAPS_API_KEY
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation project(':feature:launches')
+    implementation project(':feature:saved')
+    implementation project(':feature:launch_detail')
+    api project(':core')
+
+    // Android X
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationFragmentKtx"
+    implementation "androidx.navigation:navigation-ui:$rootProject.navigationUiKtx"
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompat"
+    implementation "androidx.core:core-ktx:$rootProject.coreKtx"
+
+    // Design
+    implementation "com.google.android.material:material:$rootProject.material"
+
+    // Testing
+    testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.extJunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoCore"
+
+    // HILT
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$rootProject.timber"
+
+}

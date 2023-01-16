@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_launch_min_height">164dp</dimen>
+    <dimen name="item_launch_icon_size">16dp</dimen>
+    <dimen name="launch_image_corners">12dp</dimen>
+</resources>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SpaceHub</string>
+    <string name="bottom_nav_launches">Launches</string>
+    <string name="bottom_nav_news">News</string>
+    <string name="bottom_nav_saved">Saved</string>
+    <string name="generic_error_title">Houston we have a problem!</string>
+    <string name="generic_error_description">Something went wrong, please check your network and try again</string>
+    <string name="try_again">Try Again</string>
+    <string name="error_view_icon_content_description">Error Icon</string>
+    <string name="view_launch_separator">:</string>
+    <string name="view_launch_seconds">Sec</string>
+    <string name="view_launch_minutes">Min</string>
+    <string name="view_launch_hours">Hours</string>
+    <string name="view_launch_days">Days</string>
+</resources>

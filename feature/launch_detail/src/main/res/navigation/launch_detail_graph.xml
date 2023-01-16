@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/launch_detail_graph"
+    app:startDestination="@id/navigation_launch_detail">
+
+    <activity
+        android:id="@+id/navigation_launch_detail"
+        android:name="com.lpirro.launch_detail.tabs.presentation.LaunchDetailActivity"
+        android:label="@string/launch_detail">
+
+        <argument
+            android:name="launchId"
+            app:argType="string" />
+
+        <deepLink app:uri="android-app://com.lpirro.spacehub/launch_detail?launchId={launchId}" />
+
+    </activity>
+
+    <activity
+        android:id="@+id/navigation_youtube_full_screen"
+        android:name="com.lpirro.launch_detail.overview.presentation.YouTubeActivity">
+
+        <argument
+            android:name="youtubeId"
+            app:argType="string" />
+    </activity>
+
+</navigation>

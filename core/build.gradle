@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.lpirro.core'
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    api project(':data:repository')
+    api project(':domain')
+
+    implementation 'androidx.databinding:viewbinding:7.3.1'
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompat"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-ui:$rootProject.navigationUiKtx"
+
+    // Design
+    implementation "com.google.android.material:material:$rootProject.material"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$rootProject.timber"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide"
+
+    // Chrome Custom Tabs
+    implementation "androidx.browser:browser:$rootProject.chromeWebTab"
+
+    implementation 'com.robinhood.ticker:ticker:2.0.4'
+
+}

@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.lpirro.network'
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_BASE_URL", "\"https://ll.thespacedevs.com\""
+            buildConfigField "String", "API_VERSION", "\"2.2.0\""
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_BASE_URL", "\"https://ll.thespacedevs.com\""
+            buildConfigField "String", "API_VERSION", "\"2.2.0\""
+        }
+    }
+}
+
+dependencies {
+
+    // Testing
+    testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.extJunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoCore"
+
+    // HILT
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitGsonConverter"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.httpLogginInterceptor"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okHttp"
+
+}

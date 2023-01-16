@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorSuccessContainer" format="reference" />
+    <attr name="colorWarningContainer" format="reference" />
+    <attr name="colorOnSuccessContainer" format="reference" />
+    <attr name="colorOnWarningContainer" format="reference" />
+</resources>

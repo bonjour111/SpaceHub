@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/navigation_saved_launches"
+    android:id="@+id/saved_launches_graph">
+
+    <fragment
+        android:id="@+id/navigation_saved_launches"
+        android:name="com.lpirro.saved.presentation.SavedLaunchesFragment"
+        android:label="@string/saved_launches" />
+
+</navigation>

@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.lpirro.launches'
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    api project(":core")
+    api project(":domain")
+
+    // Android X
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationFragmentKtx"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationUiKtx"
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompat"
+    implementation "androidx.core:core-ktx:$rootProject.coreKtx"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifeCycle"
+
+    // Design
+    implementation "com.google.android.material:material:$rootProject.material"
+
+    // Testing
+    testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.extJunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoCore"
+
+    // HILT
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.kotlinxCoroutinesCore"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide"
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.swipeRefresh"
+}

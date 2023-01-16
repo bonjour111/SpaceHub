@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="launches">Launches</string>
+    <string name="tab_launches_upcoming">Upcoming</string>
+    <string name="tab_launches_past">Past</string>
+    <string name="launch_image_content_description">Launch Image</string>
+</resources>
