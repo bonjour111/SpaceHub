@@ -1,43 +1,31 @@
 package com.lpirro.repository.mapper
 
-import android.content.Context
-import android.content.res.Configuration
-import android.content.res.Resources
-import android.os.LocaleList
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.`when`
-import org.mockito.Spy
-import org.mockito.kotlin.mock
+import java.text.SimpleDateFormat
 import java.util.Locale
+
+private const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssX"
 
 class DateParserTest {
 
     private lateinit var dateUnderTest: String
 
-    @Spy
     private lateinit var dateParser: DateParser
-    private var applicationContext: Context = mock()
 
     @Before
     fun setup() {
-        val resources: Resources = mock()
-        val configuration: Configuration = mock()
-        val localeList: LocaleList = mock()
-
-        `when`(applicationContext.resources).thenReturn(resources)
-        `when`(applicationContext.resources.configuration).thenReturn(configuration)
-        `when`(applicationContext.resources.configuration.locales).thenReturn(localeList)
-        `when`(applicationContext.resources.configuration.locales.get(0)).thenReturn(Locale.US)
-        dateParser = DateParserImpl(applicationContext)
-
+        dateParser = DateParserImpl()
         dateUnderTest = "2022-12-25T09:30:00Z"
     }
 
     @Test
     fun `Full Date parsed correctly in dd MMM yyyy HHmm`() {
-        val expectedResult = "25 Dec 2022 • 10:30"
+        val parser = SimpleDateFormat(DATE_FORMAT, Locale.US)
+        val formatter = SimpleDateFormat("dd MMM yyyy • HH:mm", Locale.US)
+
+        val expectedResult = parser.parse(dateUnderTest)?.let { formatter.format(it) } ?: "-"
         val result = dateParser.parseFullDate(dateUnderTest)
 
         assertEquals(result, expectedResult)
