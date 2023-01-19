@@ -18,14 +18,12 @@
  *
  */
 
-package com.lpirro.repository.mapper
+package com.lpirro.launch_detail.vehicles.viewmodel
 
-import com.lpirro.domain.models.Launch
-import com.lpirro.network.models.LaunchRemote
-import com.lpirro.persistence.model.LaunchLocal
-import com.lpirro.persistence.model.LaunchType
+import com.lpirro.launch_detail.vehicles.model.LaunchVehiclesItem
 
-interface LaunchMapper {
-    fun mapToDomain(launchLocal: LaunchLocal): Launch
-    fun mapToLocal(launchRemote: LaunchRemote, launchType: LaunchType?): LaunchLocal
+sealed class LaunchDetailVehiclesUiState {
+    object Loading : LaunchDetailVehiclesUiState()
+    data class Success(val launchVehicles: List<LaunchVehiclesItem>) : LaunchDetailVehiclesUiState()
+    object Error : LaunchDetailVehiclesUiState()
 }

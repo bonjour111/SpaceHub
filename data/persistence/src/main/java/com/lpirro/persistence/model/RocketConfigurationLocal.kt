@@ -18,14 +18,29 @@
  *
  */
 
-package com.lpirro.repository.mapper
+package com.lpirro.persistence.model
 
-import com.lpirro.domain.models.Launch
-import com.lpirro.network.models.LaunchRemote
-import com.lpirro.persistence.model.LaunchLocal
-import com.lpirro.persistence.model.LaunchType
-
-interface LaunchMapper {
-    fun mapToDomain(launchLocal: LaunchLocal): Launch
-    fun mapToLocal(launchRemote: LaunchRemote, launchType: LaunchType?): LaunchLocal
-}
+data class RocketConfigurationLocal(
+    val id: Int,
+    val name: String,
+    val manufacturer: AgencyLocal?,
+    val variant: String,
+    val height: Double?,
+    val diameter: Double?,
+    val gtoCapacity: Long?,
+    val leoCapacity: Long?,
+    val toThrust: Long?,
+    val apogee: Long?,
+    val reusable: Boolean,
+    val successfulLaunches: Int?,
+    val consecutiveSuccessfulLaunches: Int?,
+    val failedLaunches: Int?,
+    val pendingLaunches: Int?,
+    val launchCost: String?,
+    val infoUrl: String?,
+    val wikiUrl: String?,
+    val minStage: Int?,
+    val maxStage: Int?,
+    val description: String,
+    val imageUrl: String?
+)

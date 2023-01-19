@@ -18,14 +18,11 @@
  *
  */
 
-package com.lpirro.repository.mapper
+package com.lpirro.launch_detail.vehicles.mapper
 
-import com.lpirro.domain.models.Launch
-import com.lpirro.network.models.LaunchRemote
-import com.lpirro.persistence.model.LaunchLocal
-import com.lpirro.persistence.model.LaunchType
+import com.lpirro.domain.models.Rocket
+import com.lpirro.launch_detail.vehicles.model.LaunchVehiclesItem
 
-interface LaunchMapper {
-    fun mapToDomain(launchLocal: LaunchLocal): Launch
-    fun mapToLocal(launchRemote: LaunchRemote, launchType: LaunchType?): LaunchLocal
+interface LaunchVehiclesMapper {
+    fun mapToUi(rocket: Rocket): List<LaunchVehiclesItem>
 }

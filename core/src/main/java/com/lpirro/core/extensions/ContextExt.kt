@@ -18,14 +18,19 @@
  *
  */
 
-package com.lpirro.repository.mapper
+package com.lpirro.core.extensions
 
-import com.lpirro.domain.models.Launch
-import com.lpirro.network.models.LaunchRemote
-import com.lpirro.persistence.model.LaunchLocal
-import com.lpirro.persistence.model.LaunchType
+import android.content.Context
+import android.util.TypedValue
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 
-interface LaunchMapper {
-    fun mapToDomain(launchLocal: LaunchLocal): Launch
-    fun mapToLocal(launchRemote: LaunchRemote, launchType: LaunchType?): LaunchLocal
+@ColorInt
+fun Context.getColorFromAttr(
+    @AttrRes attrColor: Int,
+    typedValue: TypedValue = TypedValue(),
+    resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    return typedValue.data
 }

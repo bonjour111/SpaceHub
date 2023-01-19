@@ -20,12 +20,11 @@
 
 package com.lpirro.repository.mapper
 
-import com.lpirro.domain.models.Launch
-import com.lpirro.network.models.LaunchRemote
-import com.lpirro.persistence.model.LaunchLocal
-import com.lpirro.persistence.model.LaunchType
+import com.lpirro.domain.models.LauncherStage
+import com.lpirro.network.models.LauncherStageRemote
+import com.lpirro.persistence.model.LauncherStageLocal
 
-interface LaunchMapper {
-    fun mapToDomain(launchLocal: LaunchLocal): Launch
-    fun mapToLocal(launchRemote: LaunchRemote, launchType: LaunchType?): LaunchLocal
+interface LauncherStageMapper {
+    fun mapToDomain(launcherStageLocal: LauncherStageLocal): LauncherStage
+    fun mapToLocal(launcherStageRemote: LauncherStageRemote): LauncherStageLocal
 }

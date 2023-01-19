@@ -36,5 +36,6 @@ data class Launch(
     val youtubeVideoId: String?,
     val infoUrl: String?,
     val flightClubUrl: String?,
-    val updates: List<Update>?
+    val updates: List<Update>?,
+    val rocket: Rocket
 )

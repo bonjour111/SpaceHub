@@ -18,14 +18,8 @@
  *
  */
 
-package com.lpirro.repository.mapper
+package com.lpirro.network.models
 
-import com.lpirro.domain.models.Launch
-import com.lpirro.network.models.LaunchRemote
-import com.lpirro.persistence.model.LaunchLocal
-import com.lpirro.persistence.model.LaunchType
+import com.google.gson.annotations.SerializedName
 
-interface LaunchMapper {
-    fun mapToDomain(launchLocal: LaunchLocal): Launch
-    fun mapToLocal(launchRemote: LaunchRemote, launchType: LaunchType?): LaunchLocal
-}
+data class LandingLocationRemote(@SerializedName("name") val name: String)

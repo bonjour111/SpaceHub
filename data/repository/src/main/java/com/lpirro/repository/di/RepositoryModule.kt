@@ -32,6 +32,10 @@ import com.lpirro.repository.mapper.DateParser
 import com.lpirro.repository.mapper.DateParserImpl
 import com.lpirro.repository.mapper.LaunchMapper
 import com.lpirro.repository.mapper.LaunchMapperImpl
+import com.lpirro.repository.mapper.LauncherLandingMapper
+import com.lpirro.repository.mapper.LauncherLandingMapperImpl
+import com.lpirro.repository.mapper.LauncherStageMapper
+import com.lpirro.repository.mapper.LauncherStageMapperImpl
 import com.lpirro.repository.mapper.LocationMapper
 import com.lpirro.repository.mapper.LocationMapperImpl
 import com.lpirro.repository.mapper.MapPositionMapper
@@ -44,6 +48,10 @@ import com.lpirro.repository.mapper.OrbitMapper
 import com.lpirro.repository.mapper.OrbitMapperImpl
 import com.lpirro.repository.mapper.PadMapper
 import com.lpirro.repository.mapper.PadMapperImpl
+import com.lpirro.repository.mapper.RocketConfigurationMapper
+import com.lpirro.repository.mapper.RocketConfigurationMapperImpl
+import com.lpirro.repository.mapper.RocketMapper
+import com.lpirro.repository.mapper.RocketMapperImpl
 import com.lpirro.repository.mapper.StatusMapper
 import com.lpirro.repository.mapper.StatusMapperImpl
 import com.lpirro.repository.mapper.UpdateMapper
@@ -85,7 +93,8 @@ object RepositoryModule {
         statusMapper: StatusMapper,
         youTubeVideoIdParser: YouTubeVideoIdParser,
         missionMapper: MissionMapper,
-        updateMapper: UpdateMapper
+        updateMapper: UpdateMapper,
+        rocketMapper: RocketMapper,
     ): LaunchMapper {
         return LaunchMapperImpl(
             agencyMapper = agencyMapper,
@@ -95,7 +104,8 @@ object RepositoryModule {
             statusMapper = statusMapper,
             youTubeVideoIdParser = youTubeVideoIdParser,
             missionMapper = missionMapper,
-            updateMapper = updateMapper
+            updateMapper = updateMapper,
+            rocketMapper = rocketMapper
         )
     }
 
@@ -137,5 +147,31 @@ object RepositoryModule {
     @Provides
     fun provideUpdateMapper(dateParser: DateParser): UpdateMapper {
         return UpdateMapperImpl(dateParser)
+    }
+
+    @Provides
+    fun provideRocketMapper(
+        rocketConfigurationMapper: RocketConfigurationMapper,
+        launcherStageMapper: LauncherStageMapper
+    ): RocketMapper {
+        return RocketMapperImpl(
+            rocketConfigurationMapper = rocketConfigurationMapper,
+            launcherStageMapper = launcherStageMapper
+        )
+    }
+
+    @Provides
+    fun provideRocketConfigurationMapper(agencyMapper: AgencyMapper): RocketConfigurationMapper {
+        return RocketConfigurationMapperImpl(agencyMapper = agencyMapper)
+    }
+
+    @Provides
+    fun provideLauncherStageMapper(launcherLandingMapper: LauncherLandingMapper): LauncherStageMapper {
+        return LauncherStageMapperImpl(launcherLandingMapper = launcherLandingMapper)
+    }
+
+    @Provides
+    fun providesLauncherLandingMapper(): LauncherLandingMapper {
+        return LauncherLandingMapperImpl()
     }
 }

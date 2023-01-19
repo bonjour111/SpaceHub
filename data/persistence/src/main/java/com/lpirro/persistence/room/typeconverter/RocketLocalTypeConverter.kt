@@ -18,14 +18,27 @@
  *
  */
 
-package com.lpirro.repository.mapper
+package com.lpirro.persistence.room.typeconverter
 
-import com.lpirro.domain.models.Launch
-import com.lpirro.network.models.LaunchRemote
-import com.lpirro.persistence.model.LaunchLocal
-import com.lpirro.persistence.model.LaunchType
+import androidx.room.ProvidedTypeConverter
+import androidx.room.TypeConverter
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
+import com.lpirro.persistence.model.RocketLocal
 
-interface LaunchMapper {
-    fun mapToDomain(launchLocal: LaunchLocal): Launch
-    fun mapToLocal(launchRemote: LaunchRemote, launchType: LaunchType?): LaunchLocal
+@ProvidedTypeConverter
+class RocketLocalTypeConverter {
+
+    private val gson = GsonBuilder().serializeNulls().create()
+
+    @TypeConverter
+    fun statusLocalToString(rocketLocal: RocketLocal): String {
+        return gson.toJson(rocketLocal)
+    }
+
+    @TypeConverter
+    fun stringToStatusLocal(rocketLocalString: String): RocketLocal {
+        val objectType = object : TypeToken<RocketLocal>() {}.type
+        return gson.fromJson(rocketLocalString, objectType)
+    }
 }
