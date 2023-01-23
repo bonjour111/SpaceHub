@@ -59,9 +59,7 @@ class PastLaunchesFragment : BaseFragment<FragmentPastLaunchesBinding>() {
         registerObservers()
         setupRecyclerView()
         binding.errorView.retryClickListener = viewModel::refresh
-        binding.swipeRefresh.setOnRefreshListener {
-            viewModel.refresh()
-        }
+        binding.swipeRefresh.setOnRefreshListener { viewModel.refresh() }
     }
 
     override fun onPause() {
@@ -78,12 +76,11 @@ class PastLaunchesFragment : BaseFragment<FragmentPastLaunchesBinding>() {
     }
 
     private fun onUiUpdate(uiState: PastLaunchesUiState) {
-        resetViews()
+        binding.errorView.hide()
         when (uiState) {
             is PastLaunchesUiState.Error -> binding.errorView.show()
-            is PastLaunchesUiState.Loading -> binding.progressBar.show()
+            is PastLaunchesUiState.Loading -> binding.swipeRefresh.isRefreshing = uiState.isLoading
             is PastLaunchesUiState.Success -> launchesAdapter.submitList(uiState.launches)
-            is PastLaunchesUiState.Refresh -> binding.swipeRefresh.isRefreshing = uiState.isRefreshing
         }
     }
 
@@ -107,10 +104,5 @@ class PastLaunchesFragment : BaseFragment<FragmentPastLaunchesBinding>() {
             addItemDecoration(VerticalSpaceItemDecoration(spaceSize = spacing, edgeSpacing = spacing))
             adapter = launchesAdapter
         }
-    }
-
-    private fun resetViews() {
-        binding.progressBar.hide()
-        binding.errorView.hide()
     }
 }

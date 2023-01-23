@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~
+  ~ SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
+  ~ Copyright (C) 2023 Leonardo Pirro
+  ~  
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  ~
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:minHeight="132dp"
+    android:paddingHorizontal="16dp">
+
+    <ImageView
+        android:id="@+id/articleImage"
+        android:layout_width="@dimen/article_image_size"
+        android:layout_height="@dimen/article_image_size"
+        android:src="@drawable/article_image_placeholder"
+        android:contentDescription="@string/article_image_content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/newsIcon"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:src="@drawable/newspaper_variant_outline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/colorOnSurfaceVariant"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/articleInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_4dp"
+        android:textAppearance="?attr/textAppearanceLabelSmall"
+        app:layout_constraintBottom_toBottomOf="@+id/newsIcon"
+        app:layout_constraintStart_toEndOf="@+id/newsIcon"
+        app:layout_constraintTop_toTopOf="@+id/newsIcon"
+        tools:text="SpaceNews • 2 days ago" />
+
+    <TextView
+        android:id="@+id/articleTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        app:layout_constraintEnd_toStartOf="@+id/articleImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articleInfo"
+        tools:text="Roscosmos to launch uncrewed Soyuz to replace damaged spacecraft at ISS" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/relatedLaunchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginVertical="3dp"
+        android:text="@string/view_related_launch"
+        android:textColor="?attr/colorPrimary"
+        android:visibility="visible"
+        app:chipIcon="@drawable/rocket_launch_outline"
+        app:chipIconSize="16dp"
+        app:chipIconTint="?attr/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/articleImage"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/articleTitle"
+        app:layout_constraintTop_toBottomOf="@+id/articleTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

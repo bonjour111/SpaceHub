@@ -59,9 +59,7 @@ class UpcomingLaunchesFragment : BaseFragment<FragmentUpcomingLaunchesBinding>()
         registerObservers()
         setupRecyclerView()
         binding.errorView.retryClickListener = viewModel::refresh
-        binding.swipeRefresh.setOnRefreshListener {
-            viewModel.refresh()
-        }
+        binding.swipeRefresh.setOnRefreshListener { viewModel.refresh() }
     }
 
     override fun onPause() {
@@ -69,21 +67,12 @@ class UpcomingLaunchesFragment : BaseFragment<FragmentUpcomingLaunchesBinding>()
         binding.swipeRefresh.isRefreshing = false
     }
 
-    private fun registerObservers() {
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch { viewModel.uiState.collect { onUiUpdate(it) } }
-            }
-        }
-    }
-
     private fun onUiUpdate(uiState: UpcomingLaunchesUiState) {
-        resetViews()
+        binding.errorView.hide()
         when (uiState) {
             is UpcomingLaunchesUiState.Error -> binding.errorView.show()
-            is UpcomingLaunchesUiState.Loading -> binding.progressBar.show()
+            is UpcomingLaunchesUiState.Loading -> binding.swipeRefresh.isRefreshing = uiState.isLoading
             is UpcomingLaunchesUiState.Success -> launchesAdapter.submitList(uiState.launches)
-            is UpcomingLaunchesUiState.Refresh -> binding.swipeRefresh.isRefreshing = uiState.isRefreshing
         }
     }
 
@@ -109,8 +98,11 @@ class UpcomingLaunchesFragment : BaseFragment<FragmentUpcomingLaunchesBinding>()
         }
     }
 
-    private fun resetViews() {
-        binding.progressBar.hide()
-        binding.errorView.hide()
+    private fun registerObservers() {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch { viewModel.uiState.collect { onUiUpdate(it) } }
+            }
+        }
     }
 }

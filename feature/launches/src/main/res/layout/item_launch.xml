@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~
   ~ SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
   ~ Copyright (C) 2023 Leonardo Pirro
@@ -31,28 +30,38 @@
         android:layout_height="match_parent"
         android:minHeight="@dimen/item_launch_min_height">
 
-        <ImageView
-            android:id="@+id/launchImage"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardImage"
             android:layout_width="103dp"
             android:layout_height="0dp"
-            android:clipToPadding="true"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/launch_image_content_description"
+            app:cardCornerRadius="@dimen/launch_image_corners"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:background="@android:color/black" />
+            app:strokeWidth="0dp"
+            tools:background="@android:color/black">
+
+            <ImageView
+                android:id="@+id/launchImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="true"
+                android:contentDescription="@string/launch_image_content_description"
+                android:scaleType="centerCrop"
+                tools:background="@android:color/black" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/launchTitle"
-            style="@style/TextAppearance.Material3.TitleLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:layout_marginTop="12dp"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/launchImage"
+            app:layout_constraintStart_toEndOf="@+id/cardImage"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Launch Name Title" />
 
@@ -69,7 +78,6 @@
 
         <TextView
             android:id="@+id/agencyName"
-            style="@style/TextAppearance.Material3.LabelLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -77,6 +85,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintEnd_toEndOf="@+id/launchTitle"
             app:layout_constraintStart_toEndOf="@+id/agencyIcon"
@@ -96,12 +105,12 @@
 
         <TextView
             android:id="@+id/location"
-            style="@style/TextAppearance.Material3.LabelLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:gravity="center_vertical"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintEnd_toEndOf="@+id/launchTitle"
             app:layout_constraintStart_toEndOf="@+id/agencyIcon"
@@ -121,12 +130,12 @@
 
         <TextView
             android:id="@+id/date"
-            style="@style/TextAppearance.Material3.LabelLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:gravity="center_vertical"
+            android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintEnd_toEndOf="@+id/launchTitle"
             app:layout_constraintStart_toEndOf="@+id/agencyIcon"
@@ -135,10 +144,10 @@
 
         <TextView
             android:id="@+id/countdownText"
-            style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:textAppearance="?attr/textAppearanceCaption"
             android:textColor="?attr/colorOnPrimaryContainer"
             app:layout_constraintBottom_toBottomOf="@id/status"
             app:layout_constraintEnd_toEndOf="@+id/launchTitle"
@@ -147,7 +156,6 @@
 
         <com.lpirro.core.ui.view.LaunchStatusView
             android:id="@+id/status"
-            style="@style/TextAppearance.Material3.BodySmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_16dp"
@@ -155,6 +163,7 @@
             android:gravity="center"
             android:minWidth="40dp"
             android:minHeight="20dp"
+            android:textAppearance="?attr/textAppearanceBodySmall"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/launchTitle"
             app:layout_constraintTop_toBottomOf="@+id/date"

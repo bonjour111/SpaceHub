@@ -22,12 +22,18 @@ package com.lpirro.repository.di
 
 import com.lpirro.domain.repository.LaunchDetailRepository
 import com.lpirro.domain.repository.LaunchesRepository
-import com.lpirro.network.SpaceHubApiService
+import com.lpirro.domain.repository.NewsRepository
+import com.lpirro.network.LaunchLibraryApiService
+import com.lpirro.network.NewsApiService
+import com.lpirro.persistence.room.ArticleDao
 import com.lpirro.persistence.room.LaunchDao
 import com.lpirro.repository.LaunchDetailRepositoryImpl
 import com.lpirro.repository.LaunchesRepositoryImpl
+import com.lpirro.repository.NewsRepositoryImpl
 import com.lpirro.repository.mapper.AgencyMapper
 import com.lpirro.repository.mapper.AgencyMapperImpl
+import com.lpirro.repository.mapper.ArticleMapper
+import com.lpirro.repository.mapper.ArticleMapperImpl
 import com.lpirro.repository.mapper.DateParser
 import com.lpirro.repository.mapper.DateParserImpl
 import com.lpirro.repository.mapper.LaunchMapper
@@ -69,7 +75,7 @@ object RepositoryModule {
 
     @Provides
     fun provideLaunchesRepository(
-        apiService: SpaceHubApiService,
+        apiService: LaunchLibraryApiService,
         launchDao: LaunchDao,
         launchMapper: LaunchMapper
     ): LaunchesRepository {
@@ -78,10 +84,25 @@ object RepositoryModule {
 
     @Provides
     fun provideLaunchDetailRepository(
+        launchLibraryApiService: LaunchLibraryApiService,
         launchDao: LaunchDao,
         launchMapper: LaunchMapper
     ): LaunchDetailRepository {
-        return LaunchDetailRepositoryImpl(launchDao, launchMapper)
+        return LaunchDetailRepositoryImpl(launchLibraryApiService, launchDao, launchMapper)
+    }
+
+    @Provides
+    fun provideNewsRepository(
+        newsApiService: NewsApiService,
+        articleDao: ArticleDao,
+        articleMapper: ArticleMapper
+    ): NewsRepository {
+        return NewsRepositoryImpl(newsApiService, articleDao, articleMapper)
+    }
+
+    @Provides
+    fun provideArticleMapper(dateParser: DateParser): ArticleMapper {
+        return ArticleMapperImpl(dateParser)
     }
 
     @Provides
