@@ -18,18 +18,16 @@
  *
  */
 
-package com.lpirro.core.navigation
+package com.lpirro.domain.usecase
 
-import androidx.core.net.toUri
-import androidx.navigation.NavDeepLinkRequest
+import com.lpirro.domain.models.Launch
+import com.lpirro.domain.repository.SavedLaunchesRepository
+import kotlinx.coroutines.flow.Flow
 
-object NavigationUtil {
-
-    fun launchDetailDeeplink(launchId: String) = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launch_detail?launchId=$launchId".toUri())
-        .build()
-
-    fun launchesDeeplink() = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launches".toUri())
-        .build()
+class GetSavedLaunchesUseCaseImpl(
+    private val savedLaunchesRepository: SavedLaunchesRepository
+) : GetSavedLaunchesUseCase {
+    override suspend fun invoke(): Flow<List<Launch>> {
+        return savedLaunchesRepository.getLaunches()
+    }
 }

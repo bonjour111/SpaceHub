@@ -18,18 +18,13 @@
  *
  */
 
-package com.lpirro.core.navigation
+package com.lpirro.saved.viewmodel
 
-import androidx.core.net.toUri
-import androidx.navigation.NavDeepLinkRequest
+import com.lpirro.domain.models.Launch
 
-object NavigationUtil {
-
-    fun launchDetailDeeplink(launchId: String) = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launch_detail?launchId=$launchId".toUri())
-        .build()
-
-    fun launchesDeeplink() = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launches".toUri())
-        .build()
+sealed class SavedLaunchesUiState {
+    data class Loading(val isLoading: Boolean) : SavedLaunchesUiState()
+    data class Success(val launches: List<Launch>) : SavedLaunchesUiState()
+    object Error : SavedLaunchesUiState()
+    object NoSavedLaunches : SavedLaunchesUiState()
 }

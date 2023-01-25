@@ -23,6 +23,9 @@ package com.lpirro.domain.di
 import com.lpirro.domain.repository.LaunchDetailRepository
 import com.lpirro.domain.repository.LaunchesRepository
 import com.lpirro.domain.repository.NewsRepository
+import com.lpirro.domain.repository.SavedLaunchesRepository
+import com.lpirro.domain.usecase.AddToSavedLaunchesUseCase
+import com.lpirro.domain.usecase.AddToSavedLaunchesUseCaseImpl
 import com.lpirro.domain.usecase.FilterArticlesUseCase
 import com.lpirro.domain.usecase.FilterArticlesUseCaseImpl
 import com.lpirro.domain.usecase.GetArticlesUseCase
@@ -33,8 +36,14 @@ import com.lpirro.domain.usecase.GetLaunchDetailUseCase
 import com.lpirro.domain.usecase.GetLaunchDetailUseCaseImpl
 import com.lpirro.domain.usecase.GetPastLaunchesUseCase
 import com.lpirro.domain.usecase.GetPastLaunchesUseCaseImpl
+import com.lpirro.domain.usecase.GetSavedLaunchesUseCase
+import com.lpirro.domain.usecase.GetSavedLaunchesUseCaseImpl
 import com.lpirro.domain.usecase.GetUpcomingLaunchesUseCase
 import com.lpirro.domain.usecase.GetUpcomingLaunchesUseCaseImpl
+import com.lpirro.domain.usecase.IsOnSavedLaunchesUseCase
+import com.lpirro.domain.usecase.IsOnSavedLaunchesUseCaseImpl
+import com.lpirro.domain.usecase.RemoveFromSavedLaunchesUseCase
+import com.lpirro.domain.usecase.RemoveFromSavedLaunchesUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,6 +69,11 @@ object DomainModule {
     }
 
     @Provides
+    fun provideGetSavedLaunchesUseCase(repository: SavedLaunchesRepository): GetSavedLaunchesUseCase {
+        return GetSavedLaunchesUseCaseImpl(repository)
+    }
+
+    @Provides
     fun providesGetLaunchDetailOverviewUseCase(repository: LaunchDetailRepository): GetLaunchDetailOverviewUseCase {
         return GetLaunchDetailOverviewUseCaseImpl(repository)
     }
@@ -72,5 +86,20 @@ object DomainModule {
     @Provides
     fun provideFilterArticlesUseCase(repository: NewsRepository): FilterArticlesUseCase {
         return FilterArticlesUseCaseImpl(repository)
+    }
+
+    @Provides
+    fun provideAddToSavedLaunchesUseCase(repository: SavedLaunchesRepository): AddToSavedLaunchesUseCase {
+        return AddToSavedLaunchesUseCaseImpl(repository)
+    }
+
+    @Provides
+    fun provideIsOnSavedLaunchesUseCase(repository: SavedLaunchesRepository): IsOnSavedLaunchesUseCase {
+        return IsOnSavedLaunchesUseCaseImpl(repository)
+    }
+
+    @Provides
+    fun provideRemoveFromSavedLaunchesUseCase(repository: SavedLaunchesRepository): RemoveFromSavedLaunchesUseCase {
+        return RemoveFromSavedLaunchesUseCaseImpl(repository)
     }
 }

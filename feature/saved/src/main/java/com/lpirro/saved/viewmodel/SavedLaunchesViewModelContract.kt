@@ -18,18 +18,10 @@
  *
  */
 
-package com.lpirro.core.navigation
+package com.lpirro.saved.viewmodel
 
-import androidx.core.net.toUri
-import androidx.navigation.NavDeepLinkRequest
+import kotlinx.coroutines.Job
 
-object NavigationUtil {
-
-    fun launchDetailDeeplink(launchId: String) = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launch_detail?launchId=$launchId".toUri())
-        .build()
-
-    fun launchesDeeplink() = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launches".toUri())
-        .build()
+interface SavedLaunchesViewModelContract {
+    fun getSavedLaunches(): Job
 }

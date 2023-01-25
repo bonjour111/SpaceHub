@@ -18,18 +18,14 @@
  *
  */
 
-package com.lpirro.core.navigation
+package com.lpirro.domain.usecase
 
-import androidx.core.net.toUri
-import androidx.navigation.NavDeepLinkRequest
+import com.lpirro.domain.repository.SavedLaunchesRepository
 
-object NavigationUtil {
-
-    fun launchDetailDeeplink(launchId: String) = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launch_detail?launchId=$launchId".toUri())
-        .build()
-
-    fun launchesDeeplink() = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launches".toUri())
-        .build()
+class RemoveFromSavedLaunchesUseCaseImpl(
+    private val repository: SavedLaunchesRepository
+) : RemoveFromSavedLaunchesUseCase {
+    override suspend fun invoke(launchId: String) {
+        repository.removeLaunch(launchId)
+    }
 }

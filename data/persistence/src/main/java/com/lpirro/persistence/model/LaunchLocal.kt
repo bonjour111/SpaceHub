@@ -21,6 +21,7 @@
 package com.lpirro.persistence.model
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -43,6 +44,12 @@ data class LaunchLocal(
     @ColumnInfo(name = "flightclub_url") val flightClubUrl: String?,
     @ColumnInfo(name = "updates") val updates: List<UpdateLocal>?,
     @ColumnInfo(name = "rocket") val rocket: RocketLocal
+)
+
+@Entity(tableName = "saved_launch_table")
+data class SavedLaunchLocal(
+    @PrimaryKey @ColumnInfo(name = "saved_launch_id") val savedLaunchId: String,
+    @Embedded val launchLocal: LaunchLocal
 )
 
 enum class LaunchType {

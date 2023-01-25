@@ -18,18 +18,18 @@
  *
  */
 
-package com.lpirro.core.navigation
+package com.lpirro.core.ui.recyclerview.adapter
 
-import androidx.core.net.toUri
-import androidx.navigation.NavDeepLinkRequest
+import androidx.recyclerview.widget.DiffUtil
+import com.lpirro.domain.models.Launch
 
-object NavigationUtil {
+object LaunchDiffCallback : DiffUtil.ItemCallback<Launch>() {
 
-    fun launchDetailDeeplink(launchId: String) = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launch_detail?launchId=$launchId".toUri())
-        .build()
+    override fun areItemsTheSame(oldItem: Launch, newItem: Launch): Boolean {
+        return oldItem.id == newItem.id
+    }
 
-    fun launchesDeeplink() = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launches".toUri())
-        .build()
+    override fun areContentsTheSame(oldItem: Launch, newItem: Launch): Boolean {
+        return oldItem == newItem
+    }
 }

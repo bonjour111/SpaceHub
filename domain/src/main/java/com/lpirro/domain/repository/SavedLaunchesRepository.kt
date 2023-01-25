@@ -18,18 +18,14 @@
  *
  */
 
-package com.lpirro.launches.adapter
+package com.lpirro.domain.repository
 
-import androidx.recyclerview.widget.DiffUtil
 import com.lpirro.domain.models.Launch
+import kotlinx.coroutines.flow.Flow
 
-object LaunchDiffCallback : DiffUtil.ItemCallback<Launch>() {
-
-    override fun areItemsTheSame(oldItem: Launch, newItem: Launch): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: Launch, newItem: Launch): Boolean {
-        return oldItem == newItem
-    }
+interface SavedLaunchesRepository {
+    suspend fun getLaunches(): Flow<List<Launch>>
+    suspend fun addLaunch(launchId: String)
+    suspend fun removeLaunch(launchId: String)
+    suspend fun isSaved(launchId: String): Flow<Boolean>
 }

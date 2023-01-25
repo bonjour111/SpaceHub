@@ -18,7 +18,7 @@
  *
  */
 
-package com.lpirro.launches.adapter
+package com.lpirro.core.ui.recyclerview.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,11 +27,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.lpirro.core.R
+import com.lpirro.core.databinding.ItemLaunchBinding
+import com.lpirro.core.ui.view.CountdownTimerTextView
 import com.lpirro.domain.models.Launch
 import com.lpirro.domain.models.Status
-import com.lpirro.launches.CountdownTimerTextView
-import com.lpirro.launches.R
-import com.lpirro.launches.databinding.ItemLaunchBinding
 
 class LaunchesAdapter(
     private val launchClick: (launchId: String) -> Unit,

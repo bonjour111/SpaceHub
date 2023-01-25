@@ -24,15 +24,88 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.lpirro.core.base.BaseFragment
+import com.lpirro.core.extensions.hide
+import com.lpirro.core.extensions.show
+import com.lpirro.core.navigation.NavigationUtil
+import com.lpirro.core.ui.recyclerview.adapter.LaunchesAdapter
+import com.lpirro.core.ui.recyclerview.decorator.VerticalSpaceItemDecoration
+import com.lpirro.domain.models.Status
 import com.lpirro.saved.databinding.FragmentSavedLaunchesBinding
+import com.lpirro.saved.viewmodel.SavedLaunchesUiState
+import com.lpirro.saved.viewmodel.SavedLaunchesViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SavedLaunchesFragment : BaseFragment<FragmentSavedLaunchesBinding>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentSavedLaunchesBinding
         get() = FragmentSavedLaunchesBinding::inflate
 
+    private val viewModel: SavedLaunchesViewModel by viewModels()
+    private lateinit var launchesAdapter: LaunchesAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        registerObservers()
+        setupRecyclerView()
+        binding.emptyView.exploreButton.setOnClickListener {
+            findNavController().navigate(NavigationUtil.launchesDeeplink())
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getSavedLaunches()
+    }
+
+    private fun onUiUpdate(uiState: SavedLaunchesUiState) {
+        binding.errorView.hide()
+        binding.emptyView.root.hide()
+        when (uiState) {
+            is SavedLaunchesUiState.Error -> binding.errorView.show()
+            is SavedLaunchesUiState.Loading -> {}
+            is SavedLaunchesUiState.Success -> launchesAdapter.submitList(uiState.launches)
+            is SavedLaunchesUiState.NoSavedLaunches -> binding.emptyView.root.show()
+        }
+    }
+
+    private fun setupRecyclerView() {
+        val spacing = resources.getDimensionPixelSize(com.lpirro.core.R.dimen.margin_16dp)
+        launchesAdapter = LaunchesAdapter(::goToLaunchDetail, ::showStatusDialog)
+        binding.savedLaunchesRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(VerticalSpaceItemDecoration(spaceSize = spacing, edgeSpacing = spacing))
+            adapter = launchesAdapter
+        }
+    }
+
+    private fun registerObservers() {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch { viewModel.uiState.collect { onUiUpdate(it) } }
+            }
+        }
+    }
+
+    private fun goToLaunchDetail(launchId: String) {
+        findNavController().navigate(NavigationUtil.launchDetailDeeplink(launchId))
+    }
+
+    private fun showStatusDialog(status: Status) {
+        val builder = MaterialAlertDialogBuilder(requireContext())
+        builder.setTitle(status.name)
+        builder.setMessage(status.description)
+        builder.setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
+        builder.show()
     }
 }
