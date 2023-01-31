@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~
   ~ SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
   ~ Copyright (C) 2023 Leonardo Pirro
   ~
@@ -16,7 +15,6 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  ~
   -->
 
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,16 +28,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.gms.maps.MapView
+        <ImageView
             android:id="@+id/googleMap"
             android:layout_width="match_parent"
             android:layout_height="230dp"
-            app:liteMode="true"
-            app:cameraZoom="13"
             app:layout_constraintBottom_toTopOf="@id/mapsCardValue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/mapsCardValue"

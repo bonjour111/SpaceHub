@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~
   ~ SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
   ~ Copyright (C) 2023 Leonardo Pirro
   ~
@@ -16,7 +15,6 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  ~
   -->
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,9 +22,9 @@
     android:id="@+id/launch_detail_graph"
     app:startDestination="@id/navigation_launch_detail">
 
-    <activity
+    <fragment
         android:id="@+id/navigation_launch_detail"
-        android:name="com.lpirro.launch_detail.tabs.presentation.LaunchDetailActivity"
+        android:name="com.lpirro.launch_detail.tabs.presentation.LaunchDetailFragment"
         android:label="@string/launch_detail">
 
         <argument
@@ -35,7 +33,7 @@
 
         <deepLink app:uri="android-app://com.lpirro.spacehub/launch_detail?launchId={launchId}" />
 
-    </activity>
+    </fragment>
 
     <activity
         android:id="@+id/navigation_youtube_full_screen"

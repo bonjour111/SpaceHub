@@ -1,5 +1,4 @@
 /*
- *
  * SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
  * Copyright (C) 2023 Leonardo Pirro
  *
@@ -15,7 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 package com.lpirro.launch_detail.overview.presentation
@@ -69,9 +67,6 @@ class LaunchDetailOverviewFragment : BaseFragment<FragmentLaunchDetailOverviewBi
             is LaunchDetailOverviewUiState.Loading -> {}
             is LaunchDetailOverviewUiState.Success -> {
                 launchOverviewAdapter.items = uiState.launchOverview
-                if (binding.launchOverviewRecyclerView.adapter == null) {
-                    binding.launchOverviewRecyclerView.adapter = launchOverviewAdapter
-                }
             }
         }
     }
@@ -96,6 +91,12 @@ class LaunchDetailOverviewFragment : BaseFragment<FragmentLaunchDetailOverviewBi
     }
 
     private fun setupRecyclerView() {
+        binding.launchOverviewRecyclerView.itemAnimator = null
+        binding.launchOverviewRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(LaunchOverviewItemDecorator())
+        }
+
         launchOverviewAdapter = LaunchOverviewAdapter(
             addToCalendarListener = viewModel::addLaunchToCalendar,
             addToSavedListener = viewModel::addToSavedLaunches,
@@ -107,11 +108,7 @@ class LaunchDetailOverviewFragment : BaseFragment<FragmentLaunchDetailOverviewBi
             wikipediaClickListener = viewModel::openChromeCustomTab
         )
 
-        binding.launchOverviewRecyclerView.itemAnimator = null
-        binding.launchOverviewRecyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(LaunchOverviewItemDecorator())
-        }
+        binding.launchOverviewRecyclerView.adapter = launchOverviewAdapter
     }
 
     private fun registerObservers() {

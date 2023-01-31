@@ -1,5 +1,4 @@
 /*
- *
  * SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
  * Copyright (C) 2023 Leonardo Pirro
  *
@@ -15,13 +14,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 package com.lpirro.core.extensions
 
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.TranslateAnimation
 import androidx.appcompat.widget.SearchView
 
 fun View.show() {
@@ -63,4 +62,20 @@ inline fun MenuItem.onMenuItemActionCollapse(crossinline onMenuItemActionCollaps
             return true
         }
     })
+}
+
+fun View.slideUp(duration: Int = 500) {
+    visibility = View.VISIBLE
+    val animate = TranslateAnimation(0f, 0f, this.height.toFloat(), 0f)
+    animate.duration = duration.toLong()
+    animate.fillAfter = true
+    this.startAnimation(animate)
+}
+
+fun View.slideDown(duration: Int = 500) {
+    visibility = View.VISIBLE
+    val animate = TranslateAnimation(0f, 0f, 0f, this.height.toFloat())
+    animate.duration = duration.toLong()
+    animate.fillAfter = true
+    this.startAnimation(animate)
 }

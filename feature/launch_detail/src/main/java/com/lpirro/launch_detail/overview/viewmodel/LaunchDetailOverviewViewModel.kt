@@ -1,5 +1,4 @@
 /*
- *
  * SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
  * Copyright (C) 2023 Leonardo Pirro
  *
@@ -15,18 +14,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 package com.lpirro.launch_detail.overview.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lpirro.domain.models.Launch
 import com.lpirro.domain.usecase.AddToSavedLaunchesUseCase
 import com.lpirro.domain.usecase.GetLaunchDetailOverviewUseCase
 import com.lpirro.domain.usecase.IsOnSavedLaunchesUseCase
 import com.lpirro.domain.usecase.RemoveFromSavedLaunchesUseCase
 import com.lpirro.launch_detail.overview.mapper.LaunchOverviewMapper
+import com.lpirro.notifications.LaunchNotificationScheduler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,7 +43,8 @@ class LaunchDetailOverviewViewModel @Inject constructor(
     private val addToSavedLaunchesUseCase: AddToSavedLaunchesUseCase,
     private val removeFromSavedLaunchesUseCase: RemoveFromSavedLaunchesUseCase,
     private val isOnSavedLaunchesUseCase: IsOnSavedLaunchesUseCase,
-    private val mapper: LaunchOverviewMapper
+    private val mapper: LaunchOverviewMapper,
+    private val notificationScheduler: LaunchNotificationScheduler
 ) : ViewModel(), LaunchDetailOverviewViewModelContract {
 
     private val _uiState =
@@ -53,10 +54,13 @@ class LaunchDetailOverviewViewModel @Inject constructor(
     private val _events = MutableSharedFlow<LaunchDetailOverviewEvent>()
     val events: SharedFlow<LaunchDetailOverviewEvent> = _events
 
+    private lateinit var launch: Launch
+
     override fun getLaunch(id: String) = viewModelScope.launch {
         try {
             val isSaved = isOnSavedLaunchesUseCase(id).single()
             getLaunchDetailOverviewUseCase(id).collect { launch ->
+                this@LaunchDetailOverviewViewModel.launch = launch
                 _uiState.value =
                     LaunchDetailOverviewUiState.Success(mapper.mapToUi(launch, isSaved))
             }
@@ -100,11 +104,17 @@ class LaunchDetailOverviewViewModel @Inject constructor(
         _uiState.value = LaunchDetailOverviewUiState.Loading
         addToSavedLaunchesUseCase(launchId)
         getLaunch(launchId)
+        notificationScheduler.createNotificationAlarm(
+            timeMillis = launch.netMillis!!,
+            launchId = launchId,
+            notificationTitle = launch.name
+        )
     }
 
     override fun removeFromSavedLaunches(launchId: String) = viewModelScope.launch {
         _uiState.value = LaunchDetailOverviewUiState.Loading
         removeFromSavedLaunchesUseCase(launchId)
         getLaunch(launchId)
+        notificationScheduler.removeNotificationAlarm(launch.id)
     }
 }

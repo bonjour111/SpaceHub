@@ -1,5 +1,4 @@
 /*
- *
  * SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
  * Copyright (C) 2023 Leonardo Pirro
  *
@@ -15,21 +14,29 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 package com.lpirro.core.navigation
 
+import android.net.Uri
 import androidx.core.net.toUri
 import androidx.navigation.NavDeepLinkRequest
 
 object NavigationUtil {
 
+    fun getLaunchDetailUri(launchId: String): Uri {
+        return "android-app://com.lpirro.spacehub/launch_detail?launchId=$launchId".toUri()
+    }
+
+    private fun getLaunchesUri(): Uri {
+        return "android-app://com.lpirro.spacehub/launches".toUri()
+    }
+
     fun launchDetailDeeplink(launchId: String) = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launch_detail?launchId=$launchId".toUri())
+        .fromUri(getLaunchDetailUri(launchId))
         .build()
 
     fun launchesDeeplink() = NavDeepLinkRequest.Builder
-        .fromUri("android-app://com.lpirro.spacehub/launches".toUri())
+        .fromUri(getLaunchesUri())
         .build()
 }

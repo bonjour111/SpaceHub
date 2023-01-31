@@ -1,5 +1,4 @@
 /*
- *
  * SpaceHub - Designed and Developed by LPirro (Leonardo Pirro)
  * Copyright (C) 2023 Leonardo Pirro
  *
@@ -15,13 +14,13 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 package com.lpirro.launch_detail.tabs.presentation
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.lpirro.launch_detail.mission.presentation.LaunchDetailMissionFragment
 import com.lpirro.launch_detail.overview.presentation.LaunchDetailOverviewFragment
@@ -31,8 +30,9 @@ private const val NUM_TABS = 3
 
 class LaunchDetailViewPagerAdapter(
     private val launchId: String,
-    fragmentActivity: FragmentActivity,
-) : FragmentStateAdapter(fragmentActivity) {
+    fragmentManager: FragmentManager,
+    lifecycle: Lifecycle
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
         return NUM_TABS
