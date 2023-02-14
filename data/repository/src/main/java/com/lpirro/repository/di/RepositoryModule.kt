@@ -58,8 +58,8 @@ import com.lpirro.repository.mapper.RocketConfigurationMapper
 import com.lpirro.repository.mapper.RocketConfigurationMapperImpl
 import com.lpirro.repository.mapper.RocketMapper
 import com.lpirro.repository.mapper.RocketMapperImpl
-import com.lpirro.repository.mapper.StatusMapper
-import com.lpirro.repository.mapper.StatusMapperImpl
+import com.lpirro.repository.mapper.LaunchStatusMapper
+import com.lpirro.repository.mapper.LaunchStatusMapperImpl
 import com.lpirro.repository.mapper.UpdateMapper
 import com.lpirro.repository.mapper.UpdateMapperImpl
 import com.lpirro.repository.mapper.YouTubeVideoIdParser
@@ -119,7 +119,7 @@ object RepositoryModule {
         missionPatchMapper: MissionPatchMapper,
         padMapper: PadMapper,
         dateParser: DateParser,
-        statusMapper: StatusMapper,
+        launchStatusMapper: LaunchStatusMapper,
         youTubeVideoIdParser: YouTubeVideoIdParser,
         missionMapper: MissionMapper,
         updateMapper: UpdateMapper,
@@ -130,7 +130,7 @@ object RepositoryModule {
             missionPatchMapper = missionPatchMapper,
             padMapper = padMapper,
             dateParser = dateParser,
-            statusMapper = statusMapper,
+            launchStatusMapper = launchStatusMapper,
             youTubeVideoIdParser = youTubeVideoIdParser,
             missionMapper = missionMapper,
             updateMapper = updateMapper,
@@ -157,7 +157,7 @@ object RepositoryModule {
     fun provideDateParser(): DateParser = DateParserImpl()
 
     @Provides
-    fun provideStatusMapper(): StatusMapper = StatusMapperImpl()
+    fun provideLaunchStatusMapper(): LaunchStatusMapper = LaunchStatusMapperImpl()
 
     @Provides
     fun provideYouTubeVideoIdParser(): YouTubeVideoIdParser = YouTubeVideoIdParserImpl()

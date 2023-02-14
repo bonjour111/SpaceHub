@@ -16,11 +16,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.lpirro.persistence.model
+package com.lpirro.repository.mapper
 
-data class StatusLocal(
-    val id: Int,
-    val name: String,
-    val abbrev: String,
-    val description: String
-)
+import com.lpirro.domain.models.LaunchStatus
+import com.lpirro.network.models.LaunchStatusRemote
+import com.lpirro.persistence.model.LaunchStatusLocal
+
+interface LaunchStatusMapper {
+    fun mapToDomain(launchStatusLocal: LaunchStatusLocal): LaunchStatus
+    fun mapToLocal(launchStatusRemote: LaunchStatusRemote): LaunchStatusLocal
+}

@@ -18,20 +18,14 @@
 
 package com.lpirro.repository.mapper
 
-import com.lpirro.domain.models.Agency
-import com.lpirro.domain.models.Location
-import com.lpirro.domain.models.Mission
-import com.lpirro.domain.models.MissionPatches
-import com.lpirro.domain.models.Orbit
-import com.lpirro.domain.models.Pad
-import com.lpirro.domain.models.Status
+import com.lpirro.domain.models.*
 import com.lpirro.network.models.AgencyRemote
 import com.lpirro.network.models.LocationRemote
 import com.lpirro.network.models.MissionPatchesRemote
 import com.lpirro.network.models.MissionRemote
 import com.lpirro.network.models.OrbitRemote
 import com.lpirro.network.models.PadRemote
-import com.lpirro.network.models.StatusRemote
+import com.lpirro.network.models.LaunchStatusRemote
 import com.lpirro.persistence.model.AgencyLocal
 import com.lpirro.persistence.model.LaunchType
 import com.lpirro.persistence.model.LocationLocal
@@ -39,7 +33,7 @@ import com.lpirro.persistence.model.MissionLocal
 import com.lpirro.persistence.model.MissionPatchesLocal
 import com.lpirro.persistence.model.OrbitLocal
 import com.lpirro.persistence.model.PadLocal
-import com.lpirro.persistence.model.StatusLocal
+import com.lpirro.persistence.model.LaunchStatusLocal
 import com.lpirro.repository.mapper.util.MockMapperUtil
 import com.lpirro.repository.mapper.util.NET
 import com.lpirro.repository.mapper.util.WINDOW_END
@@ -62,7 +56,7 @@ class LaunchMapperTest {
     private val missionPatchMapper: MissionPatchMapper = mock()
     private val padMapper: PadMapper = mock()
     private val dateParser: DateParser = mock()
-    private val statusMapper: StatusMapper = mock()
+    private val launchStatusMapper: LaunchStatusMapper = mock()
     private val youTubeVideoIdParser: YouTubeVideoIdParser = mock()
     private val missionMapper: MissionMapper = mock()
     private val updateMapper: UpdateMapper = mock()
@@ -78,7 +72,7 @@ class LaunchMapperTest {
             missionPatchMapper = missionPatchMapper,
             padMapper = padMapper,
             dateParser = dateParser,
-            statusMapper = statusMapper,
+            launchStatusMapper = launchStatusMapper,
             youTubeVideoIdParser = youTubeVideoIdParser,
             missionMapper = missionMapper,
             updateMapper = updateMapper,
@@ -95,8 +89,8 @@ class LaunchMapperTest {
         whenever(dateParser.parseFullDate(WINDOW_START)).thenReturn(EXPECTED_WINDOW_START_PARSED_DATE)
         whenever(dateParser.parseFullDate(WINDOW_END)).thenReturn(EXPECTED_WINDOW_END_PARSED_DATE)
         whenever(dateParser.parseDateInMillis(any())).thenReturn(EXPECTED_NET_PARSED_DATE_MILLIS)
-        whenever(statusMapper.mapToDomain(any())).thenReturn(MockMapperUtil.mockStatus())
-        whenever(statusMapper.mapToLocal(any())).thenReturn(MockMapperUtil.mockStatusLocal())
+        whenever(launchStatusMapper.mapToDomain(any())).thenReturn(MockMapperUtil.mockStatus())
+        whenever(launchStatusMapper.mapToLocal(any())).thenReturn(MockMapperUtil.mockStatusLocal())
         whenever(youTubeVideoIdParser.getVideoId(any())).thenReturn(MockMapperUtil.mockLaunchLocal().liveVideoUrl)
         whenever(missionMapper.mapToDomain(any())).thenReturn(MockMapperUtil.mockMission())
         whenever(missionMapper.mapToLocal(any())).thenReturn(MockMapperUtil.mockMissionLocal())
@@ -123,7 +117,7 @@ class LaunchMapperTest {
         assertEquals(EXPECTED_WINDOW_END_PARSED_DATE, mappedLaunch.windowEndDisplay)
         assertEquals(EXPECTED_NET_PARSED_DATE_MILLIS, mappedLaunch.netMillis)
         assertEquals(launchLocal.windowEnd, mappedLaunch.windowEnd)
-        assertStatusEquals(launchLocal.status, mappedLaunch.status)
+        assertLaunchStatusEquals(launchLocal.status, mappedLaunch.status)
         assertEquals(launchLocal.liveVideoUrl, mappedLaunch.youtubeVideoId)
         assertEquals(launchLocal.infoUrl, mappedLaunch.infoUrl)
         assertEquals(launchLocal.flightClubUrl, mappedLaunch.flightClubUrl)
@@ -144,7 +138,7 @@ class LaunchMapperTest {
         assertEquals(launchRemote.net, mappedLaunch.net)
         assertEquals(launchRemote.windowStart, mappedLaunch.windowStart)
         assertEquals(launchRemote.windowEnd, mappedLaunch.windowEnd)
-        assertStatusEquals(launchRemote.status, mappedLaunch.status)
+        assertLaunchStatusEquals(launchRemote.status, mappedLaunch.status)
         assertEquals(launchRemote.videoUrls.firstOrNull()?.url, mappedLaunch.liveVideoUrl)
         assertEquals(launchRemote.infoURLs!!.firstOrNull()?.url, mappedLaunch.infoUrl)
         assertEquals(launchRemote.flightClubUrl, mappedLaunch.flightClubUrl)
@@ -178,17 +172,17 @@ class LaunchMapperTest {
         assertEquals(orbitRemote.abbrev, orbitLocal.abbrev)
     }
 
-    private fun assertStatusEquals(statusLocal: StatusLocal, status: Status) {
-        assertEquals(statusLocal.name, status.name)
-        assertEquals(statusLocal.abbrev, status.abbrev)
-        assertEquals(statusLocal.description, status.description)
+    private fun assertLaunchStatusEquals(launchStatusLocal: LaunchStatusLocal, launchStatus: LaunchStatus) {
+        assertEquals(launchStatusLocal.name, launchStatus.name)
+        assertEquals(launchStatusLocal.abbrev, launchStatus.abbrev)
+        assertEquals(launchStatusLocal.description, launchStatus.description)
     }
 
-    private fun assertStatusEquals(statusRemote: StatusRemote, statusLocal: StatusLocal) {
-        assertEquals(statusRemote.id, statusLocal.id)
-        assertEquals(statusRemote.name, statusLocal.name)
-        assertEquals(statusRemote.abbrev, statusLocal.abbrev)
-        assertEquals(statusRemote.description, statusLocal.description)
+    private fun assertLaunchStatusEquals(launchStatusRemote: LaunchStatusRemote, launchStatusLocal: LaunchStatusLocal) {
+        assertEquals(launchStatusRemote.id, launchStatusLocal.id)
+        assertEquals(launchStatusRemote.name, launchStatusLocal.name)
+        assertEquals(launchStatusRemote.abbrev, launchStatusLocal.abbrev)
+        assertEquals(launchStatusRemote.description, launchStatusLocal.description)
     }
 
     private fun assertPadEquals(padLocal: PadLocal, pad: Pad) {

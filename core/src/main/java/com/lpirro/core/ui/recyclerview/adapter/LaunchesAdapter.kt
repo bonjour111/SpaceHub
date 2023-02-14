@@ -29,11 +29,11 @@ import com.lpirro.core.R
 import com.lpirro.core.databinding.ItemLaunchBinding
 import com.lpirro.core.ui.view.CountdownTimerTextView
 import com.lpirro.domain.models.Launch
-import com.lpirro.domain.models.Status
+import com.lpirro.domain.models.LaunchStatus
 
 class LaunchesAdapter(
     private val launchClick: (launchId: String) -> Unit,
-    private val launchStatusClick: (status: Status) -> Unit,
+    private val launchStatusClick: (status: LaunchStatus) -> Unit,
 ) :
     ListAdapter<Launch, LaunchesAdapter.LaunchesViewHolder>(LaunchDiffCallback) {
 

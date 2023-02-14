@@ -21,7 +21,7 @@ package com.lpirro.launch_detail.overview.presentation.delegates
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import com.lpirro.core.extensions.hide
 import com.lpirro.core.extensions.visible
-import com.lpirro.domain.models.Status
+import com.lpirro.domain.models.LaunchStatus
 import com.lpirro.launch_detail.R
 import com.lpirro.launch_detail.databinding.ItemPastLaunchHeaderBinding
 import com.lpirro.launch_detail.overview.model.LaunchOverviewItem
@@ -37,13 +37,13 @@ fun pastLaunchHeaderDelegate(
             val resources = itemView.context.resources
 
             val launchStatus = when (item.status) {
-                is Status.Success -> resources.getString(R.string.launch_completed)
-                is Status.InFlight -> resources.getString(R.string.launch_in_flight)
+                is LaunchStatus.Success -> resources.getString(R.string.launch_completed)
+                is LaunchStatus.InFlight -> resources.getString(R.string.launch_in_flight)
                 else -> resources.getString(R.string.launch_failed)
             }
 
             val launchIcon = when (item.status) {
-                is Status.Success -> com.lpirro.core.R.drawable.outline_done
+                is LaunchStatus.Success -> com.lpirro.core.R.drawable.outline_done
                 else -> com.lpirro.core.R.drawable.outline_error
             }
 

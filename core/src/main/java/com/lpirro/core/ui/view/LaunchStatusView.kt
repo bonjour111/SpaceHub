@@ -29,7 +29,7 @@ import com.lpirro.core.R
 import com.lpirro.core.databinding.ViewLaunchStatusBinding
 import com.lpirro.core.extensions.getColorFromAttr
 import com.lpirro.core.extensions.visible
-import com.lpirro.domain.models.Status
+import com.lpirro.domain.models.LaunchStatus
 
 class LaunchStatusView @JvmOverloads constructor(
     context: Context,
@@ -56,28 +56,28 @@ class LaunchStatusView @JvmOverloads constructor(
             }
         }
 
-    fun setStatus(status: Status, text: String = status.abbrev) {
+    fun setStatus(status: LaunchStatus, text: String = status.abbrev) {
         val textColor: Int
         val backgroundColor: Int
 
         when (status) {
-            is Status.Failure -> {
+            is LaunchStatus.Failure -> {
                 textColor =
                     context.getColorFromAttr(com.google.android.material.R.attr.colorOnErrorContainer)
                 backgroundColor =
                     context.getColorFromAttr(com.google.android.material.R.attr.colorErrorContainer)
             }
-            is Status.Go, is Status.Success -> {
+            is LaunchStatus.Go, is LaunchStatus.Success -> {
                 textColor = context.getColorFromAttr(R.attr.colorOnSuccessContainer)
                 backgroundColor = context.getColorFromAttr(R.attr.colorSuccessContainer)
             }
-            is Status.InFlight -> {
+            is LaunchStatus.InFlight -> {
                 textColor =
                     context.getColorFromAttr(com.google.android.material.R.attr.colorOnPrimary)
                 backgroundColor =
                     context.getColorFromAttr(com.google.android.material.R.attr.colorPrimary)
             }
-            is Status.TBC, is Status.TBD -> {
+            is LaunchStatus.TBC, is LaunchStatus.TBD -> {
                 textColor = context.getColorFromAttr(R.attr.colorOnWarningContainer)
                 backgroundColor = context.getColorFromAttr(R.attr.colorWarningContainer)
             }

@@ -31,7 +31,7 @@ data class LaunchRemote(
     @SerializedName("net") val net: String?,
     @SerializedName("window_start") val windowStart: String?,
     @SerializedName("window_end") val windowEnd: String?,
-    @SerializedName("status") val status: StatusRemote,
+    @SerializedName("status") val status: LaunchStatusRemote,
     @SerializedName("vidURLs") val videoUrls: List<Urls>,
     @SerializedName("infoURLs") val infoURLs: List<Urls>?,
     @SerializedName("flightclub_url") val flightClubUrl: String?,

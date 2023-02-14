@@ -35,7 +35,7 @@ data class LaunchLocal(
     @ColumnInfo(name = "net") val net: String?,
     @ColumnInfo(name = "window_start") val windowStart: String?,
     @ColumnInfo(name = "window_end") val windowEnd: String?,
-    @ColumnInfo(name = "status") val status: StatusLocal,
+    @ColumnInfo(name = "status") val status: LaunchStatusLocal,
     @ColumnInfo(name = "type") val type: LaunchType?,
     @ColumnInfo(name = "live_video_url") val liveVideoUrl: String?,
     @ColumnInfo(name = "info_url") val infoUrl: String?,

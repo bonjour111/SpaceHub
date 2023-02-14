@@ -18,17 +18,7 @@
 
 package com.lpirro.repository.mapper.util
 
-import com.lpirro.domain.models.Agency
-import com.lpirro.domain.models.LauncherLanding
-import com.lpirro.domain.models.Location
-import com.lpirro.domain.models.MapPosition
-import com.lpirro.domain.models.Mission
-import com.lpirro.domain.models.MissionPatches
-import com.lpirro.domain.models.Orbit
-import com.lpirro.domain.models.Pad
-import com.lpirro.domain.models.Rocket
-import com.lpirro.domain.models.RocketConfiguration
-import com.lpirro.domain.models.Status
+import com.lpirro.domain.models.*
 import com.lpirro.network.models.AgencyRemote
 import com.lpirro.network.models.LandingLocationRemote
 import com.lpirro.network.models.LaunchRemote
@@ -43,7 +33,7 @@ import com.lpirro.network.models.OrbitRemote
 import com.lpirro.network.models.PadRemote
 import com.lpirro.network.models.RocketConfigurationRemote
 import com.lpirro.network.models.RocketRemote
-import com.lpirro.network.models.StatusRemote
+import com.lpirro.network.models.LaunchStatusRemote
 import com.lpirro.network.models.Urls
 import com.lpirro.persistence.model.AgencyLocal
 import com.lpirro.persistence.model.LaunchLocal
@@ -57,7 +47,7 @@ import com.lpirro.persistence.model.OrbitLocal
 import com.lpirro.persistence.model.PadLocal
 import com.lpirro.persistence.model.RocketConfigurationLocal
 import com.lpirro.persistence.model.RocketLocal
-import com.lpirro.persistence.model.StatusLocal
+import com.lpirro.persistence.model.LaunchStatusLocal
 
 const val NET = "2022-12-25T09:30:00Z"
 const val WINDOW_START = "2022-12-25T08:30:00Z"
@@ -227,21 +217,21 @@ object MockMapperUtil {
         mapPosition = mockMapPosition()
     )
 
-    fun mockStatusRemote() = StatusRemote(
+    fun mockStatusRemote() = LaunchStatusRemote(
         id = 1,
         name = "Go for launch",
         abbrev = "Go",
         description = "StatusDescription"
     )
 
-    fun mockStatusLocal() = StatusLocal(
+    fun mockStatusLocal() = LaunchStatusLocal(
         id = 1,
         name = "Go for launch",
         abbrev = "Go",
         description = "StatusDescription"
     )
 
-    fun mockStatus() = Status.Go(
+    fun mockStatus() = LaunchStatus.Go(
         name = "Go for launch",
         abbrev = "Go",
         description = "StatusDescription"

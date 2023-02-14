@@ -35,7 +35,7 @@ import com.lpirro.core.extensions.show
 import com.lpirro.core.navigation.NavigationUtil
 import com.lpirro.core.ui.recyclerview.adapter.LaunchesAdapter
 import com.lpirro.core.ui.recyclerview.decorator.VerticalSpaceItemDecoration
-import com.lpirro.domain.models.Status
+import com.lpirro.domain.models.LaunchStatus
 import com.lpirro.launches.databinding.FragmentPastLaunchesBinding
 import com.lpirro.launches.past.viewmodel.PastLaunchesUiState
 import com.lpirro.launches.past.viewmodel.PastLaunchesViewModel
@@ -82,7 +82,7 @@ class PastLaunchesFragment : BaseFragment<FragmentPastLaunchesBinding>() {
         }
     }
 
-    private fun showStatusDialog(status: Status) {
+    private fun showStatusDialog(status: LaunchStatus) {
         val builder = MaterialAlertDialogBuilder(requireContext())
         builder.setTitle(status.name)
         builder.setMessage(status.description)

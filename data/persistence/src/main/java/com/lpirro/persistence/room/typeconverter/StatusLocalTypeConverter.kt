@@ -22,7 +22,7 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.lpirro.persistence.model.StatusLocal
+import com.lpirro.persistence.model.LaunchStatusLocal
 
 @ProvidedTypeConverter
 class StatusLocalTypeConverter {
@@ -30,13 +30,13 @@ class StatusLocalTypeConverter {
     private val gson = Gson()
 
     @TypeConverter
-    fun statusLocalToString(statusLocal: StatusLocal): String {
-        return gson.toJson(statusLocal)
+    fun statusLocalToString(launchStatusLocal: LaunchStatusLocal): String {
+        return gson.toJson(launchStatusLocal)
     }
 
     @TypeConverter
-    fun stringToStatusLocal(statusLocalString: String): StatusLocal {
-        val objectType = object : TypeToken<StatusLocal>() {}.type
+    fun stringToStatusLocal(statusLocalString: String): LaunchStatusLocal {
+        val objectType = object : TypeToken<LaunchStatusLocal>() {}.type
         return gson.fromJson(statusLocalString, objectType)
     }
 }

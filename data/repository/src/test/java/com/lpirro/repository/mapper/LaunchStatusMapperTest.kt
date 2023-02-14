@@ -23,19 +23,19 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class StatusMapperTest {
+class LaunchStatusMapperTest {
 
-    lateinit var statusMapper: StatusMapper
+    lateinit var launchStatusMapper: LaunchStatusMapper
 
     @Before
     fun setup() {
-        statusMapper = StatusMapperImpl()
+        launchStatusMapper = LaunchStatusMapperImpl()
     }
 
     @Test
     fun `StatusLocal to Status maps Correctly`() {
         val statusLocal = MockMapperUtil.mockStatusLocal()
-        val mappedStatus = statusMapper.mapToDomain(statusLocal)
+        val mappedStatus = launchStatusMapper.mapToDomain(statusLocal)
 
         assertEquals(statusLocal.name, mappedStatus.name)
         assertEquals(statusLocal.abbrev, mappedStatus.abbrev)
@@ -45,7 +45,7 @@ class StatusMapperTest {
     @Test
     fun `StatusRemote to StatusLocal maps Correctly`() {
         val statusRemote = MockMapperUtil.mockStatusRemote()
-        val mappedStatus = statusMapper.mapToLocal(statusRemote)
+        val mappedStatus = launchStatusMapper.mapToLocal(statusRemote)
 
         assertEquals(statusRemote.id, mappedStatus.id)
         assertEquals(statusRemote.name, mappedStatus.name)

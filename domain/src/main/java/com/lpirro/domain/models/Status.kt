@@ -18,7 +18,7 @@
 
 package com.lpirro.domain.models
 
-sealed class Status(
+sealed class LaunchStatus(
     open val name: String,
     open val abbrev: String,
     open val description: String
@@ -27,41 +27,41 @@ sealed class Status(
         override val name: String,
         override val abbrev: String,
         override val description: String
-    ) : Status(name, abbrev, description)
+    ) : LaunchStatus(name, abbrev, description)
 
     data class TBC(
         override val name: String,
         override val abbrev: String,
         override val description: String
-    ) : Status(name, abbrev, description)
+    ) : LaunchStatus(name, abbrev, description)
 
     data class Go(
         override val name: String,
         override val abbrev: String,
         override val description: String
-    ) : Status(name, abbrev, description)
+    ) : LaunchStatus(name, abbrev, description)
 
     data class Success(
         override val name: String,
         override val abbrev: String,
         override val description: String
-    ) : Status(name, abbrev, description)
+    ) : LaunchStatus(name, abbrev, description)
 
     data class Failure(
         override val name: String,
         override val abbrev: String,
         override val description: String
-    ) : Status(name, abbrev, description)
+    ) : LaunchStatus(name, abbrev, description)
 
     data class InFlight(
         override val name: String,
         override val abbrev: String,
         override val description: String
-    ) : Status(name, abbrev, description)
+    ) : LaunchStatus(name, abbrev, description)
 
     data class Unknown(
         override val name: String,
         override val abbrev: String,
         override val description: String
-    ) : Status(name, abbrev, description)
+    ) : LaunchStatus(name, abbrev, description)
 }

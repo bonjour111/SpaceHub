@@ -18,7 +18,7 @@
 
 package com.lpirro.launch_detail.mission.model
 
-import com.lpirro.domain.models.Status
+import com.lpirro.domain.models.LaunchStatus
 import com.lpirro.domain.models.Update
 
 interface LaunchMissionItem
@@ -37,7 +37,7 @@ data class DescriptionUi(
 ) : LaunchMissionItem
 
 data class LaunchInfoUi(
-    val status: Status,
+    val status: LaunchStatus,
     val net: String,
     val windowStart: String,
     val windowEnd: String

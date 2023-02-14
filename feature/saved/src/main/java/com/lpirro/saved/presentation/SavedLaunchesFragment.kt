@@ -38,7 +38,7 @@ import com.lpirro.core.navigation.NavigationUtil
 import com.lpirro.core.ui.NavDrawerInteraction
 import com.lpirro.core.ui.recyclerview.adapter.LaunchesAdapter
 import com.lpirro.core.ui.recyclerview.decorator.VerticalSpaceItemDecoration
-import com.lpirro.domain.models.Status
+import com.lpirro.domain.models.LaunchStatus
 import com.lpirro.saved.databinding.FragmentSavedLaunchesBinding
 import com.lpirro.saved.viewmodel.SavedLaunchesUiState
 import com.lpirro.saved.viewmodel.SavedLaunchesViewModel
@@ -121,7 +121,7 @@ class SavedLaunchesFragment : BaseFragment<FragmentSavedLaunchesBinding>() {
         findNavController().navigate(NavigationUtil.launchDetailDeeplink(launchId))
     }
 
-    private fun showStatusDialog(status: Status) {
+    private fun showStatusDialog(status: LaunchStatus) {
         val builder = MaterialAlertDialogBuilder(requireContext())
         builder.setTitle(status.name)
         builder.setMessage(status.description)
